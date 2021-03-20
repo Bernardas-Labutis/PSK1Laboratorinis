@@ -4,19 +4,9 @@
         <jta-data-source>GunshopsDataSource</jta-data-source>
         <class>lt.vu.entities.Gun</class>
         <class>lt.vu.entities.Gunshop</class>
-        <class>lt.vu.entities.Gunshopgun</class>
         <properties>
-            <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="toplink.jdbc.url" value="jdbc:h2:~/h2database/GunshopsDB"/>
-            <property name="toplink.jdbc.driver" value="org.h2.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:h2:~/h2database/GunshopsDB"/>
-            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
-            <property name="openjpa.ConnectionURL" value="jdbc:h2:~/h2database/GunshopsDB"/>
-            <property name="openjpa.ConnectionDriverName" value="org.h2.Driver"/>
-            <property name="eclipselink.jdbc.url" value="jdbc:h2:~/h2database/GunshopsDB"/>
-            <property name="eclipselink.jdbc.driver" value="org.h2.Driver"/>
         </properties>
     </persistence-unit>
 </persistence>

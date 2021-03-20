@@ -1,23 +1,31 @@
 package lt.vu.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Gun.findAll", query = "select g from Gun as g")
+})
 public class Gun {
-    private long id;
+    private Long id;
     private String name;
     private String actiontype;
-    private Collection<Gunshopgun> gunshopguns;
+    private Set<Gunshop> gunshops;
 
     @Id
+    @GeneratedValue
     @Column(name = "ID")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,27 +49,27 @@ public class Gun {
         this.actiontype = actiontype;
     }
 
+    @ManyToMany
+    public Set<Gunshop> getGunshops(){return gunshops;}
+    public void setGunshops (Set<Gunshop> gunshops) {this.gunshops = gunshops;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Gun gun = (Gun) o;
-        return id == gun.id &&
-                Objects.equals(name, gun.name) &&
-                Objects.equals(actiontype, gun.actiontype);
+
+        if (!Objects.equals(id, gun.id)) return false;
+        if (!Objects.equals(name, gun.name)) return false;
+        return Objects.equals(actiontype, gun.actiontype);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, actiontype);
-    }
-
-    @OneToMany(mappedBy = "gun")
-    public Collection<Gunshopgun> getGunshopguns() {
-        return gunshopguns;
-    }
-
-    public void setGunshopguns(Collection<Gunshopgun> gunshopguns) {
-        this.gunshopguns = gunshopguns;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (actiontype != null ? actiontype.hashCode() : 0);
+        return result;
     }
 }

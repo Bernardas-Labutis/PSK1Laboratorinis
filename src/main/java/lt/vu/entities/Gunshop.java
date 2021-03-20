@@ -1,19 +1,20 @@
 package lt.vu.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Gunshop {
-    private long id;
+    private Long id;
     private String name;
     private String licencetype;
-    private Collection<Gunshopgun> gunshopguns;
+    private Set<Gun> gunshopGuns;
 
     @Id
+    @GeneratedValue
     @Column(name = "ID")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -41,27 +42,32 @@ public class Gunshop {
         this.licencetype = licencetype;
     }
 
+    @ManyToMany
+    @JoinTable(
+            name = "GUNSHOPGUN",
+            joinColumns = @JoinColumn(name = "GUNSHOP_ID"),
+            inverseJoinColumns = @JoinColumn(name = "GUN_ID"))
+    public Set<Gun> getGunshopGuns(){return gunshopGuns;}
+    public void setGunshopGuns (Set<Gun> gunshopGuns) {this.gunshopGuns = gunshopGuns;}
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Gunshop gunshop = (Gunshop) o;
-        return id == gunshop.id &&
-                Objects.equals(name, gunshop.name) &&
-                Objects.equals(licencetype, gunshop.licencetype);
+
+        if (!Objects.equals(id, gunshop.id)) return false;
+        if (!Objects.equals(name, gunshop.name)) return false;
+        return Objects.equals(licencetype, gunshop.licencetype);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, licencetype);
-    }
-
-    @OneToMany(mappedBy = "gunshop")
-    public Collection<Gunshopgun> getGunshopguns() {
-        return gunshopguns;
-    }
-
-    public void setGunshopguns(Collection<Gunshopgun> gunshopguns) {
-        this.gunshopguns = gunshopguns;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (licencetype != null ? licencetype.hashCode() : 0);
+        return result;
     }
 }

@@ -25,6 +25,6 @@ create table gunshopgun(
 insert into gunshop(name) values('parduotuve');
 insert into gun(name) values ('ginklas');
 
-insert into gunshopgun(gunshop_id, gun_id) values (1, 1)
+insert into gunshopgun(gunshop_id, gun_id) values (1, 1);
 
-select * from gunshopgun
+select * from PUBLIC.GUN

@@ -23,7 +23,6 @@ public class TestComponent {
     public String getGunshopGuns(){
         EntityManager entityManager = emf.createEntityManager();
         entityManager.createQuery("select g from Gun g").getResultList();
-        var a = new Gunshop().getGunshopguns();
         return "ok" + getClass().getSimpleName();
     }
 }
