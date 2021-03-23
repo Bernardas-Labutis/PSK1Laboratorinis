@@ -25,7 +25,11 @@ public class GunsDAO {
         this.em.persist(gun);
     }
 
-    public Gun findOne(Integer id) {
+    public Gun findOne(Long id) {
         return em.find(Gun.class, id);
+    }
+
+    public Gun update(Gun gun){
+        return em.merge(gun);
     }
 }

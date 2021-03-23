@@ -1,6 +1,7 @@
 package lt.vu.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ public class Gunshop {
     private Long id;
     private String name;
     private String licencetype;
-    private Set<Gun> gunshopGuns;
+    private Set<Gun> gunshopGuns = new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -42,7 +43,7 @@ public class Gunshop {
         this.licencetype = licencetype;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "GUNSHOPGUN",
             joinColumns = @JoinColumn(name = "GUNSHOP_ID"),

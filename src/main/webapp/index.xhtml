@@ -9,13 +9,13 @@
     <h2>Guns:</h2>
     <ol>
         <ui:repeat value="#{guns.allGuns}" var="gun">
-            <li><h:link value="#{gun.name}" outcome="players?teamId=#{gun.id}" /></li>
+            <li><h:link value="#{gun.name}" outcome="gunshops?gunId=#{gun.id}" /></li>
         </ui:repeat>
     </ol>
     <h:form>
         <h:inputText value="#{guns.gunToCreate.name}" required="true" />
         <h:commandButton value="Add new gun" action="#{guns.createGun}" />
     </h:form>
-    <h:link outcome="myBatis/guns" value="MyBatis implementation"/>
+    <h:link outcome="myBatis/gunsMyBatis" value="MyBatis implementation"/>
 </h:body>
 </html>

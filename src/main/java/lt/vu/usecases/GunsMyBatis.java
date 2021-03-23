@@ -24,16 +24,16 @@ public class GunsMyBatis {
 
     @PostConstruct
     public void init() {
-        this.loadAllTeams();
+        this.loadAllGuns();
     }
 
-    private void loadAllTeams() {
+    private void loadAllGuns() {
         this.allGuns = gunMapper.selectAll();
     }
 
     @Transactional
     public String createGun() {
         gunMapper.insert(gunToCreate);
-        return "/myBatis/teams?faces-redirect=true";
+        return "/myBatis/gunsMyBatis?faces-redirect=true";
     }
 }

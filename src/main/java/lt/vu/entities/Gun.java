@@ -49,7 +49,11 @@ public class Gun {
         this.actiontype = actiontype;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "GUNSHOPGUN",
+            joinColumns = @JoinColumn(name = "GUN_ID"),
+            inverseJoinColumns = @JoinColumn(name = "GUNSHOP_ID"))
     public Set<Gunshop> getGunshops(){return gunshops;}
     public void setGunshops (Set<Gunshop> gunshops) {this.gunshops = gunshops;}
 

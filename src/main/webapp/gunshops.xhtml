@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+    <h2>Gunshops that have #{gunshopsForGun.gun.name} gun:</h2>
+    <ol>
+        <ui:repeat value="#{gunshopsForGun.gun.gunshops}" var="gunshop">
+            <li>
+                <h:outputText value="#{gunshop.name}" />
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText a:placeholder="name" value="#{gunshopsForGun.gunshopToCreate.name}" required="true" />
+        <h:commandButton value="Add a gunshop to have this gun" action="#{gunshopsForGun.createGunshop}" >
+            <f:param name="gunId" value="#{gunshopsForGun.gun.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <h:inputText a:placeholder="gunName" value="#{gunshopsForGun.gun.name}" required="true" />
+        <h:commandButton value="Change the gun`s name" action="#{updateGunDetails.updateGunName}" >
+            <f:param name="gunId" value="#{gunshopsForGun.gun.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:link outcome="index" value="Back to guns page"/>
+</h:body>
+</html>
