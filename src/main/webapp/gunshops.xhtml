@@ -15,8 +15,11 @@
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText a:placeholder="name" value="#{gunshopsForGun.gunshopToCreate.name}" required="true" />
-        <h:commandButton value="Add a gunshop to have this gun" action="#{gunshopsForGun.createGunshop}" >
+        <h:selectOneMenu id="input" value="#{gunshopsForGun.selectedGunshopId}">
+            <f:selectItems value="#{gunshops.allGunshops}" var="i" itemValue="#{i.id}" itemLabel="#{i.name}" />
+        </h:selectOneMenu>
+
+        <h:commandButton value="Add a gunshop to have this gun" action="#{gunshopsForGun.addGunshop}" >
             <f:param name="gunId" value="#{gunshopsForGun.gun.id}" />
         </h:commandButton>
     </h:form>

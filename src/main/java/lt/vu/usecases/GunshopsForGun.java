@@ -28,7 +28,7 @@ public class GunshopsForGun implements Serializable {
     private Gun gun;
 
     @Getter @Setter
-    private Gunshop gunshopToCreate = new Gunshop();
+    private Long selectedGunshopId;
 
     @PostConstruct
     public void init() {
@@ -39,9 +39,11 @@ public class GunshopsForGun implements Serializable {
     }
 
     @Transactional
-    public String createGunshop() {
-        gunshopToCreate.getGunshopGuns().add(this.gun);
-        gunshopsDAO.persist(gunshopToCreate);
+    public String addGunshop() {
+        System.out.println(selectedGunshopId);
+        Gunshop gunshop = gunshopsDAO.findOne(selectedGunshopId);
+        gun.getGunshops().add(gunshop);
+        gunsDAO.update(gun);
         return "gunshops?faces-redirect=true&gunId=" + this.gun.getId();
     }
 }

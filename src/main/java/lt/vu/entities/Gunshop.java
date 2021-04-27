@@ -6,6 +6,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Gunshop.findAll", query = "select g from Gunshop as g")
+})
 public class Gunshop {
     private Long id;
     private String name;
