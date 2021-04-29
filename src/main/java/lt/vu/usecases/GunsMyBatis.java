@@ -2,6 +2,7 @@ package lt.vu.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.interceptors.LoggedInvocation;
 import lt.vu.mybatis.dao.GunMapper;
 import lt.vu.mybatis.model.Gun;
 
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@LoggedInvocation
 @Model//@Named and @RequestScoped
 public class GunsMyBatis {
     @Inject
@@ -19,7 +21,8 @@ public class GunsMyBatis {
     @Getter
     private List<Gun> allGuns;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Gun gunToCreate = new Gun();
 
     @PostConstruct

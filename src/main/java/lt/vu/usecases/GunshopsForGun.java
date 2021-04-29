@@ -1,5 +1,13 @@
 package lt.vu.usecases;
 
+import lombok.Getter;
+import lombok.Setter;
+import lt.vu.entities.Gun;
+import lt.vu.entities.Gunshop;
+import lt.vu.interceptors.LoggedInvocation;
+import lt.vu.persistence.GunshopsDAO;
+import lt.vu.persistence.IGunsDAO;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
@@ -8,26 +16,22 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
 
-import lombok.Getter;
-import lombok.Setter;
-import lt.vu.entities.Gun;
-import lt.vu.entities.Gunshop;
-import lt.vu.persistence.GunsDAO;
-import lt.vu.persistence.GunshopsDAO;
-
+@LoggedInvocation
 @Model
 public class GunshopsForGun implements Serializable {
 
     @Inject
-    private GunsDAO gunsDAO;
+    private IGunsDAO gunsDAO;
 
     @Inject
     private GunshopsDAO gunshopsDAO;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Gun gun;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Long selectedGunshopId;
 
     @PostConstruct

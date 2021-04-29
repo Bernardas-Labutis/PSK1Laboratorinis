@@ -10,23 +10,37 @@
     <ol>
         <ui:repeat value="#{gunshopsForGun.gun.gunshops}" var="gunshop">
             <li>
-                <h:outputText value="#{gunshop.name}" />
+                <h:outputText value="#{gunshop.name}"/>
             </li>
         </ui:repeat>
     </ol>
     <h:form>
         <h:selectOneMenu id="input" value="#{gunshopsForGun.selectedGunshopId}">
-            <f:selectItems value="#{gunshops.allGunshops}" var="i" itemValue="#{i.id}" itemLabel="#{i.name}" />
+            <f:selectItems value="#{gunshops.allGunshops}" var="i" itemValue="#{i.id}" itemLabel="#{i.name}"/>
         </h:selectOneMenu>
 
-        <h:commandButton value="Add a gunshop to have this gun" action="#{gunshopsForGun.addGunshop}" >
-            <f:param name="gunId" value="#{gunshopsForGun.gun.id}" />
+        <h:commandButton value="Add a gunshop to have this gun" action="#{gunshopsForGun.addGunshop}">
+            <f:param name="gunId" value="#{gunshopsForGun.gun.id}"/>
         </h:commandButton>
     </h:form>
     <h:form>
-        <h:inputText a:placeholder="gunName" value="#{gunshopsForGun.gun.name}" required="true" />
-        <h:commandButton value="Change the gun`s name" action="#{updateGunDetails.updateGunName}" >
-            <f:param name="gunId" value="#{gunshopsForGun.gun.id}" />
+        <h:inputText a:placeholder="gunName" value="#{gunshopsForGun.gun.name}" required="true"/>
+        <h:commandButton value="Change the gun`s name" action="#{updateGunDetails.updateGunName}">
+            <f:param name="gunId" value="#{gunshopsForGun.gun.id}"/>
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <h:inputText a:placeholder="gunNumber" value="#{gunshopsForGun.gun.number}" required="true"/>
+        <h:commandButton value="Change the gun`s number" action="#{updateGunDetails.updateGunNumber()}">
+            <f:param name="gunId" value="#{gunshopsForGun.gun.id}"/>
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <h:outputText value="#{generateGunNumber.gunGenerationStatus}"/>
+        <h:commandButton value="Generate gun number?"
+                         disabled="#{generateGunNumber.gunNumberGenerationRunning}"
+                         action="#{generateGunNumber.generateNewGunNumber()}">
+            <f:param name="gunId" value="#{gunshopsForGun.gun.id}"/>
         </h:commandButton>
     </h:form>
     <h:link outcome="index" value="Back to guns page"/>

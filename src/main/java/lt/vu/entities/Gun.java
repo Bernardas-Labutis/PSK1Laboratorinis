@@ -13,6 +13,8 @@ public class Gun {
     private String name;
     private String actiontype;
     private Set<Gunshop> gunshops;
+    private Integer version;
+    private Integer number;
 
     @Id
     @GeneratedValue
@@ -54,8 +56,33 @@ public class Gun {
             name = "GUNSHOPGUN",
             joinColumns = @JoinColumn(name = "GUN_ID"),
             inverseJoinColumns = @JoinColumn(name = "GUNSHOP_ID"))
-    public Set<Gunshop> getGunshops(){return gunshops;}
-    public void setGunshops (Set<Gunshop> gunshops) {this.gunshops = gunshops;}
+    public Set<Gunshop> getGunshops() {
+        return gunshops;
+    }
+
+    public void setGunshops(Set<Gunshop> gunshops) {
+        this.gunshops = gunshops;
+    }
+
+    @Column(name = "VERSION")
+    @Version
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    @Basic
+    @Column(name = "NUMBER")
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     @Override
     public boolean equals(Object o) {
